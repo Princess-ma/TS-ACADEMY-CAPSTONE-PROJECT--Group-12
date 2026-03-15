@@ -22,12 +22,12 @@
 
 | Name | Email | GitHub | Role |
 |---|---|---|---|
+| Kolawole Julius Oluwatobi | anthonyjk1204@gmail.com | [GitHub](https://github.com/kjuls) | Active Member |
 | Olaleru Praise Ajibola | zionpraiz9@gmail.com | [GitHub](https://github.com/zionpraiz9-code/TS_ACADEMY_CAPSTONE-PROJECT-GROUP-12/tree/main) | Active Member |
+| Adeleye Adekunle Oluwaseun | dequnle7@gmail.com | [GitHub](https://github.com/qunlecrown/TS-ACADEMY-GROUP-12-CAPSTONE-PROJECT/tree/main) | Active Member |
 | Udoh Edidiong Monday | beeeddy22@gmail.com | [GitHub](https://github.com/Edidiong-Udoh2/CAPSTONE-GROUP-12-PROJECT) | Active Member |
 | Ukonu Fortune Chiemela | ukonufortune@gmail.com | [GitHub](https://github.com/Fortuneukonu) | Active Member |
 | Ogunniyi Ibrahim Adedeji | ogunniyiibrahim2029@gmail.com | [GitHub](https://github.com/nobleXibrahim/fraud-detection) | Active Member |
-| Adeleye Adekunle Oluwaseun | dequnle7@gmail.com | [GitHub](https://github.com/qunlecrown/TS-ACADEMY-GROUP-12-CAPSTONE-PROJECT/tree/main) | Active Member |
-| Kolawole Julius Oluwatobi | anthonyjk1204@gmail.com | [GitHub](https://github.com/kjuls) | Active Member |
 | Titus Oluwafemi Ojo | femititus@gmail.com | [GitHub](https://github.com/femititus/TS_ACADEMY_GROUP_12_CAPSTONE_PROJECT_FRAUD_DETECTION_2) | Active Member |
 
 
@@ -62,13 +62,28 @@ To address the common challenge of imbalanced fraud datasets, undersampling tech
 
 The major goal of this capstone project is to build classification models that could be able to identify the patterns in the various transactions and train these models in order to predict the outcome of the transactions if they are fraud transactions or not. These models are built in an attempt to be deployed into real world data especially financial databases and be able to use the models that we build and train to immediately flag transactions who follows the same pattern of the transactions flagged as fraud and prevent future users from falling victims of fraud.
 
-SPECIFIC OBJECTIVES
-Detect fraudulent financial transactions using machine learning
-Analyze transaction behavior and spending patterns
-Handle imbalanced fraud datasets using resampling techniques
-Train and evaluate classification models for fraud.
-Identify key transaction features that contribute to fraud detection.
+## Specific Objectives
 
+- Detect fraudulent financial transactions using machine learning
+- Analyze transaction behavior and spending patterns
+- Handle imbalanced fraud datasets using resampling techniques
+- Train and evaluate classification models for fraud
+- Identify key transaction features that contribute to fraud detection
+
+## DATA SOURCE AND JUSTIFICATION
+The dataset being used is a fraud detection dataset of users who carried out transactions using paysim. PaySim is a financial simulator that simulates mobile money transactions based on an original dataset. Although the dataset was generated synthetically using paysim, this dataset was chosen because of how good it relates with real world financial transactions and is also a very good dataset that works well with classification models. The dataset shows transactions that were tagged as fraud and those that were legit. It is a large dataset containing 5,420,481 rows and 27 columns sourced from kaggle website (with_aggregated): https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim
+
+## SUMMARY OF THE DATASET
+| Property | Details |
+|---|---|
+| **Source** | [Kaggle — PaySim Fraud Detection (with aggregated)](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) |
+| **Records** | 5,420,481 transactions |
+| **Original Features** | 27 columns |
+| **Final Features Used** | 6 selected features |
+| **Target Variable** | `fraud_label` (0 = Non-Fraud, 1 = Fraud) |
+| **Fraud Rate** | 1.12% (60,666 fraud / 5,359,815 non-fraud) |
+| **Memory (Original)** | 1,116 MB |
+| **Memory (Optimised)** | 475 MB (-57.4%) |
 
 
 
