@@ -13,7 +13,7 @@
 ### Group Leader
 | Name | Email | GitHub | Role |
 |---|---|---|---|
-| Princess Chiamaka Emenari | princessemenari2@gmail.com | | Group Leader |
+| Princess Chiamaka Emenari | princessemenari2@gmail.com | [Github](https://github.com/Princess-ma) | Group Leader |
 
 ---
 ### Active Members
@@ -21,12 +21,12 @@
 | Name | Email | GitHub | Role |
 |---|---|---|---|
 | Kolawole Julius Oluwatobi | anthonyjk1204@gmail.com | [GitHub](https://github.com/kjuls) | Active Member |
-| Olaleru Praise Ajibola | zionpraiz9@gmail.com | [GitHub](https://github.com/zionpraiz9-code/TS_ACADEMY_CAPSTONE-PROJECT-GROUP-12/tree/main) | Active Member |
-| Adeleye Adekunle Oluwaseun | dequnle7@gmail.com | [GitHub](https://github.com/qunlecrown/TS-ACADEMY-GROUP-12-CAPSTONE-PROJECT/tree/main) | Active Member |
-| Udoh Edidiong Monday | beeeddy22@gmail.com | [GitHub](https://github.com/Edidiong-Udoh2/CAPSTONE-GROUP-12-PROJECT) | Active Member |
+| Olaleru Praise Ajibola | zionpraiz9@gmail.com | [GitHub](https://github.com/zionpraiz9-code) | Active Member |
+| Adeleye Adekunle Oluwaseun | dequnle7@gmail.com | [GitHub](https://github.com/qunlecrown) | Active Member |
+| Udoh Edidiong Monday | beeeddy22@gmail.com | [GitHub](https://github.com/Edidiong-Udoh2) | Active Member |
 | Ukonu Fortune Chiemela | ukonufortune@gmail.com | [GitHub](https://github.com/Fortuneukonu) | Active Member |
-| Ogunniyi Ibrahim Adedeji | ogunniyiibrahim2029@gmail.com | [GitHub](https://github.com/nobleXibrahim/fraud-detection) | Active Member |
-| Titus Oluwafemi Ojo | femititus@gmail.com | [GitHub](https://github.com/femititus/TS_ACADEMY_GROUP_12_CAPSTONE_PROJECT_FRAUD_DETECTION_2) | Active Member |
+| Ogunniyi Ibrahim Adedeji | ogunniyiibrahim2029@gmail.com | [GitHub](https://github.com/nobleXibrahim) | Active Member |
+| Titus Oluwafemi Ojo | femititus@gmail.com | [GitHub](https://github.com/femititus) | Active Member |
 
 
 ## 📌 Table of Contents
@@ -68,12 +68,12 @@ The major goal of this capstone project is to build classification models that c
 - Identify key transaction features that contribute to fraud detection
 
 ## DATA SOURCE AND JUSTIFICATION
-The dataset being used is a fraud detection dataset of users who carried out transactions using paysim. PaySim is a financial simulator that simulates mobile money transactions based on an original dataset. Although the dataset was generated synthetically using paysim, this dataset was chosen because of how good it relates with real world financial transactions and is also a very good dataset that works well with classification models. The dataset shows transactions that were tagged as fraud and those that were legit. It is a large dataset containing 5,420,481 rows and 27 columns sourced from kaggle website (with_aggregated): https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim
+The dataset being used is a fraud detection dataset of users who carried out transactions using paysim. PaySim is a financial simulator that simulates mobile money transactions based on an original dataset. Although the dataset was generated synthetically using paysim, this dataset was chosen because of how good it relates with real world financial transactions and is also a very good dataset that works well with classification models. The dataset shows transactions that were tagged as fraud and those that were legit. It is a large dataset containing 5,420,481 rows and 27 columns sourced from kaggle website (with_aggregated): [Kaggel Website](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) 
 
 ### SUMMARY OF THE DATASET
 | Property | Details |
 |---|---|
-| **Source** | [Kaggle — PaySim Fraud Detection (with aggregated)](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) |
+| **Source** | [Kaggle — Dataset](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) |
 | **Records** | 5,420,481 transactions |
 | **Original Features** | 27 columns |
 | **Final Features Used** | 6 selected features |
