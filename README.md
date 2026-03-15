@@ -13,7 +13,7 @@
 ### Group Leader
 | Name | Email | GitHub | Role |
 |---|---|---|---|
-| Princess Chiamaka Emenari | princessemenari2@gmail.com | [Github](https://github.com/Princess-ma) | Group Leader |
+| **PRINCESS CHIAMAKA EMENARI** | princessemenari2@gmail.com | [Github](https://github.com/Princess-ma) | ***Group Leader*** |
 
 ---
 ### Active Members
