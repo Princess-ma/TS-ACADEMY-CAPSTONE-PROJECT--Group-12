@@ -42,9 +42,8 @@
   - [Stage 3 — Bivariate & Multivariate Analysis]
   - [Stage 4 — Data Preprocessing]
   - [Stage 5 — Machine Learning]
-- [Key Findings]
-- [Model Performance]
-- [Feature Importance]
+       - [Model Performance]
+       - [Feature Importance]
 - [Results Summary]
 - [Recommendations]
 
@@ -136,19 +135,119 @@ Stage 3 produced the most decisive analytical discoveries of the entire project,
 
 Building directly on the evidence from Stage 3, Stage 4 translated all analytical findings into a precise, model-ready dataset. Six features were selected which are:`transaction_amount`, `avg_amount_last_30days`, `transaction_type_encoded`, `total_sent_last_1hr`, `receiver_balance_after` and `week_group_encoded` based on correlation strength, absence of multicollinearity and domain-level interpretability. Features with severe redundancy were excluded, including the three other avg_amount columns (0.93–0.96 correlation with avg_amount_last_30days), sender_balance_before (0.94 correlation with sender_balance_after) and row_id/hour_of_simulation (perfect 1.00 correlation with each other). The dataset was split 80/20 using stratified sampling with random_state=42, preserving the 1.12% fraud rate in both partitions whch produced a training set of 4,336,384 and a test set of 1,084,097. Random undersampling was applied exclusively to the training set, randomly reducing the 4,287,851 non-fraud records to match the 48,533 fraud records, producing a perfectly balanced training set of 97,066 samples. The test set was deliberately left at its original imbalanced distribution to accurately simulate real-world deployment conditions. StandardScaler was fitted exclusively on the balanced training set and used to transform both the training and test sets, ensuring mean=0 and std=1 across all 6 features without allowing the 98.88% non-fraud majority to distort the scaling parameters.
 
+### Stage 5- Machine Learning
 
-### Stage 5 — Machine Learning
-Two classification models were built and evaluated — Logistic Regression and Random Forest — alongside a Grid Search CV hyperparameter optimization on the Random Forest, with all models trained on the balanced undersampled training set of 97,066 samples produced in Stage 4.
+Two classification models were built and evaluated in this project which are Logistic Regression (baseline) and Random Forest classification (advanced) alongside a Grid Search CV hyperparameter optimization, all trained on the balanced undersampled training set of 97,066 samples from Stage 4.
 
-The **Logistic Regression** model was configured with strong L2 regularization (C=0.05, solver=lbfgs, max_iter=1000). The regularization was deliberately set strong because without it, the large magnitude features identified in Stage 3 — particularly `avg_amount_last_30days` and `transaction_amount` — would produce disproportionately large coefficients that overwhelm the decision boundary and cause overfitting on the balanced training distribution. The model was trained on the scaled training data (X_train_scaled) and achieved a train accuracy of 95.80% and test accuracy of 98.98%, with a train recall of 92.51% and test recall of 92.58% — confirming strong generalization on fraud detection. The test precision of 52.49% and F1 score of 67.00% reflect the expected challenge of a linear model applied to a non-linear fraud problem where the real-world test set is 98.88% non-fraud. The confusion matrix on the test set showed 11,233 true positives (correctly caught fraud), 900 false negatives (missed fraud), 1,061,798 true negatives and 10,166 false positives (legitimate transactions incorrectly flagged).
+The **Logistic Regression** model was configured with strong L2 regularization (C=0.05) to prevent the large-magnitude features particularly `avg_amount_last_30days` and `transaction_amount` from dominating the decision boundary. It achieved a train accuracy of 95.80%, test accuracy of 98.98% and test recall of 92.58%, correctly catching 11,233 out of 12,133 fraud cases. The test precision of 52.49% and F1 of 67.00% reflect the expected challenge of a linear model applied to a non-linear, imbalanced fraud problem. Feature coefficients confirmed every Stage 3 finding — `avg_amount_last_30days` led at +10.293, `transaction_amount` followed at +7.228, and `week_group_encoded` at +0.680 validated the end-of-month temporal signal despite its near-zero Pearson correlation.
+### Logistic Regression
+| Metric | Train | Test |
+|---|---|---|
+| Accuracy | 95.80% | 98.98% |
+| Precision | 99.02% | 52.49% |
+| Recall | 92.51% | 92.58% |
+| F1 Score | 95.66% | 67.00% |
 
-The feature importance analysis for Logistic Regression expressed through learned coefficients confirmed every key finding from the Stage 3 EDA. `avg_amount_last_30days` led with a coefficient of +10.293, making it the single strongest fraud signal — directly aligned with its 0.70 correlation from Stage 3 and the 15–20x average amount gap identified in the bivariate analysis. `transaction_amount` followed at +7.228, consistent with its 0.60 correlation and the violin plot findings. `week_group_encoded` carried a positive coefficient of +0.680, validating the decision to retain the end-of-month temporal signal despite its near-zero Pearson correlation. `transaction_type_encoded` at +0.314 confirms TRANSFER and CASH_OUT are correctly weighted toward fraud. `total_sent_last_1hr` at −0.280 and `receiver_balance_after` at −1.274 both carry negative coefficients — meaning higher values in these features lean toward non-fraud — which aligns with the Stage 3 finding that legitimate users have higher sustained transaction counts and receiver balances increase normally after legitimate transactions.
+**Confusion Matrix — Test Set**
+|  | Predicted Non-Fraud | Predicted Fraud |
+|---|---|---|
+| **Actual Non-Fraud** | 1,061,798 | 10,166 |
+| **Actual Fraud** | 900 | 11,233 |
 
-The **Random Forest** model was chosen over a single Decision Tree because the ensemble of 100 independent trees corrects the high variance problem that a single tree suffers from on a 5.4 million record dataset with extreme skewness (transaction_amount skew=12.622, kurtosis=230.642). Each tree in the forest is trained on a random bootstrap sample and considers only sqrt(6)=2 features at each split, decorrelating the individual trees and preventing any single dominant feature from controlling all splits. The model was configured with max_depth=8, min_samples_split=100 and min_samples_leaf=50 to prevent overfitting — without depth constraints, trees would grow deep enough to memorize individual training records rather than learn generalizable fraud patterns. Unlike Logistic Regression, Random Forest was trained directly on unscaled data (X_train_balanced) since tree-based splits operate on threshold values rather than distance or gradient calculations. The Random Forest achieved a train accuracy of 98.40% and test accuracy of 98.98%, with a train recall of 97.56% and test recall of 97.50% — the near-perfect consistency between train and test recall confirms that the depth constraints effectively controlled overfitting. The test F1 score of 71.46% outperforms Logistic Regression's 67.00%, and the confusion matrix showed only 303 false negatives compared to 900 for Logistic Regression — meaning the forest caught 597 more fraud cases — alongside 9,146 false positives compared to 10,166, representing 1,020 fewer false alarms simultaneously.
+The **Random Forest** outperformed Logistic Regression across every fraud-specific metric. Configured with n_estimators=100, max_depth=8 and min_samples_leaf=50 to prevent overfitting, it achieved a test recall of 97.50% and F1 of 71.46% — reducing false negatives from 900 to just 303 and false positives from 10,166 to 9,146 compared to Logistic Regression. Feature importance by Gini impurity ranked `transaction_amount` first at 42.54%, `avg_amount_last_30days` second at 26.39%, `total_sent_last_1hr` third at 17.55%, `transaction_type_encoded` fourth at 9.95%, `receiver_balance_after` fifth at 3.23% and `week_group_encoded` last at 0.34% — validating all feature selection decisions from Stage 4 and confirming that the behavioral fraud patterns discovered in Stages 2 and 3 translated directly into model-level predictive power.
+### Random Forest
+| Metric | Train | Test |
+|---|---|---|
+| Accuracy | 98.40% | 98.98% |
+| Precision | 99.22% | 56.40% |
+| Recall | 97.56% | 97.50% |
+| F1 Score | 98.38% | 71.46% |
 
-The feature importance analysis for Random Forest measured by Gini impurity reduction across all 100 trees produced a ranking that both validates the Stage 3 correlation findings and reveals important non-linear distinctions. `transaction_amount` ranked first at 42.54% importance — outranking `avg_amount_last_30days` (26.39%) despite having a lower Pearson correlation (0.60 vs 0.70) — because Random Forest measures non-linear Gini reduction at each split threshold rather than linear correlation, and transaction_amount provides more powerful immediate splitting boundaries across the 97,066 balanced training records. `total_sent_last_1hr` ranked third at 17.55%, higher than its relative position in Logistic Regression, confirming that short-window velocity is a non-linear fraud signal that tree-based models capture more effectively than linear models. `transaction_type_encoded` followed at 9.95%, reflecting the decisive channel-based split between TRANSFER/CASH_OUT and the three safe transaction types. `receiver_balance_after` contributed 3.23% and `week_group_encoded` contributed 0.34% — both serving as supporting signals rather than primary predictors, consistent with their roles identified throughout the EDA.
+**Confusion Matrix — Test Set**
+|  | Predicted Non-Fraud | Predicted Fraud |
+|---|---|---|
+| **Actual Non-Fraud** | 1,062,818 | 9,146 |
+| **Actual Fraud** | 303 | 11,830 |
 
-The **Grid Search CV** evaluated all 162 combinations from the parameter grid (n_estimators: [50, 100, 200], max_depth: [6, 8, 10], min_samples_split: [50, 100, 200], min_samples_leaf: [25, 50, 100], max_features: ['sqrt', 'log2']) using 3-fold cross-validation and ROC-AUC as the scoring metric — totalling 486 model fits. The best parameters identified were max_depth=10, max_features='sqrt', min_samples_leaf=25, min_samples_split=50 and n_estimators=100, achieving a best cross-validation ROC-AUC of 0.9993 (99.93%). The increase in max_depth from 8 to 10 confirmed that slightly deeper trees better capture the complex non-linear interaction patterns between transaction_amount and transaction_type identified in Stage 3. The reduction in min_samples_leaf from 50 to 25 and min_samples_split from 100 to 50 allowed finer, more granular splits that better differentiate the concentrated fraud signatures around high-amount TRANSFER and CASH_OUT transactions. The optimised model achieved a test fraud precision of 0.60, recall of 0.98 and F1 score of 0.75 — improvements of +3.60%, +0.50% and +3.54% respectively over the baseline Random Forest — confirming that the manually tuned baseline parameters were near-optimal and that the Grid Search refinements, while incremental, translate into meaningful operational improvements in a real-world fraud detection deployment.
+The **Grid Search CV** evaluated 162 parameter combinations across 486 model fits using ROC-AUC as the scoring metric, identifying the optimal configuration as max_depth=10, min_samples_leaf=25, min_samples_split=50, n_estimators=100 and max_features='sqrt'. This achieved a best cross-validation ROC-AUC of 0.9993, improving fraud precision to 0.60, recall to 0.98 and F1 to 0.75 — confirming the baseline parameters were near-optimal while delivering meaningful operational improvements that make the Grid Search optimised Random Forest the recommended production model.
+### Grid Search CV — Optimised Random Forest
+```
+Best Parameters:
+  max_depth         : 10
+  max_features      : 'sqrt'
+  min_samples_leaf  : 25
+  min_samples_split : 50
+  n_estimators      : 100
+
+Best CV ROC-AUC    : 0.9993 (99.93%)
+```
+| Class | Precision | Recall | F1 Score |
+|---|---|---|---|
+| Non-Fraud | 1.00 | 0.99 | 1.00 |
+| **Fraud** | **0.60** | **0.98** | **0.75** |
+| Overall Accuracy | | | **99%** |
+
+> **Best Model: Grid Search optimised Random Forest**
+> — Catches 98 in every 100 fraudulent transactions
+> — Only 303 missed fraud cases out of 12,133 total
+
+## RESULT SUMMARY
+```
+╔══════════════════════════════════════════════════════════╗
+║           FRAUD DETECTION — FINAL RESULTS               ║
+╠══════════════════════════════════════════════════════════╣
+║  Dataset          : Dataset (5,420,481 transactions)     ║
+║  Fraud Rate       : 1.12%                               ║
+║  Features Used    : 6                                   ║
+║  Best Model       : Random Forest (Grid Search Tuned)   ║
+║                                                          ║
+║  Test Recall      : 97.50% → 98.00% (after GS)         ║
+║  Test Precision   : 56.40% → 60.00% (after GS)         ║
+║  Test F1 Score    : 71.46% → 75.00% (after GS)         ║
+║  ROC-AUC          : 0.9993                              ║
+║                                                          ║
+║  Fraud Cases Caught    : 11,830 / 12,133 (97.5%)        ║
+║  Fraud Cases Missed    : 303 / 12,133   (2.5%)          ║
+╚══════════════════════════════════════════════════════════╝
+```
+
+---
+## Conclusion and RecommendationS
+### Recommendation
+
+Based on the findings of the analysis, the organisation should strengthen its fraud prevention framework by focusing on the most significant risk indicators identified in the dataset. 
+- First, real-time velocity monitoring should be implemented so that transactions associated with unusually high values of total_sent_last_1hr, particularly those above the 75th percentile threshold of 304,943, trigger immediate secondary authentication. This is necessary because rapid spending within a short period emerged as the strongest short-term fraud signal.
+- In addition, TRANSFER and CASH_OUT transactions should be subjected to stricter verification procedures. Given their fraud rates of 8.3% and 2.7% respectively, these transaction types present greater exposure to fraudulent activity, especially where the transaction amount is close to the sender’s available balance. Measures such as one-time passwords or biometric confirmation would help reduce this risk.
+- The organisation should also adopt end-of-month fraud response measures. Since Week 4 recorded the highest fraud concentration at 29.78%, compared with 22–24% in earlier weeks, fraud monitoring systems should be more sensitive and investigation teams better prepared during the final seven days of each month.
+- Furthermore, repeat receiver accounts linked to fraud should be continuously monitored. The 4,937 mule accounts identified in Stage 3 should be flagged in real time, and any transaction involving them should automatically prompt a fraud review.
+- Finally, future versions of the fraud detection model should include additional variables such as sender account age, device fingerprint consistency, and geographic velocity. These features would improve the model’s ability to detect more complex fraud patterns not fully captured by the current six-feature model.
+
+### CONCLUSION
+
+The Capstone Project carried out by the prestigious members of Group 12 project demonstrates a comprehensive fraud detection workflow that includes data preparation, exploratory analysis, visualization, and machine learning model optimization. The analysis revealed key behavioral patterns within transaction data and highlighted the challenge of detecting fraud within highly imbalanced datasets. Exploratory analysis revealed that fraudulent activities occur primarily in TRANSFER and CASH-OUT transactions, and that fraud cases are extremely rare compared to normal transactions. Visualization techniques further helped identify patterns and anomalies within the data. Through hyperparameter tuning, the Random Forest model achieved improved performance, demonstrating its effectiveness in identifying potentially fraudulent transactions within the dataset.
+These findings highlights the value of combining data analysis, visualization and machine learning to strengthen fraud detection systems in financial institutions. Such systems are essential for improving security in digital financial services and reducing the risk of financial fraud.
+
+Overall, the results show that machine learning models play an important role in improving fraud detection systems and helping financial institutions identify suspicious transactions more effectively.
+
+## ACKNOLEDGEMENTS
+- Hart Ofigwe (Data Science Tutor)
+- The TS Academy Scholarship Board
+- The Group 12 Team for their collaboration and team spirit
+- Kaggle for the Fraud Detection-Paysim Dataset
+- Scikit-learn team for developing machine learning libraries
+- GitHub for the deployment platform of our Fraud Detection Project
+
+# References
+### Data Source
+- Lopez-Rojas, E. A., Elmir, A., & Axelson, S. (2016). PaySim: A financial mobile money simulator for fraud detection. In 28th European Modeling and Simulation Symposium (EMSS).
+- chendoytshman. (2023). Fraud Detection - PaySim (with aggregated) [Data set]. Kaggle. https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim
+### Software & Libraries
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V.,
+
+
+**License**: Apache License 2.0
+**Copyright**: © 2026 TS Academy Capstone Project – Group 12
+
 
 
 
