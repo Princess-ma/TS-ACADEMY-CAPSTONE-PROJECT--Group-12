@@ -118,6 +118,25 @@ The dataset being used is a fraud detection dataset of users who carried out tra
 
 Note: Three columns were dropped during cleaning and are not included above — transaction_time_duplicate, time_merge_flag and rule_based_fraud_flag — as they were identified as redundant and irrelevant to the fraud prediction objective.
 
+## 📁 Project Structure
+
+```
+fraud-detection-paysim/
+│
+├── 📓 CAPSTONE_PROJECT.ipynb        # Main analysis notebook
+├── 📄 README.md                     # Project documentation
+├── 📊 Fraud_Detection_Paysim.csv    # Dataset (not included — see Dataset section)
+│
+├── 📁 reports/
+│   ├── stage_report_evaluations.docx
+│   └── abstract.md
+│
+└── 📁 outputs/
+    ├── confusion_matrix_lr.png
+    ├── confusion_matrix_rf.png
+    ├── feature_importance_lr.png
+    ├── feature_importance_rf.png
+    └── roc_curves.png
 
 
 
