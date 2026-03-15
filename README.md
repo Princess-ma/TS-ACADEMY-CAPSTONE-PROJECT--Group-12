@@ -47,3 +47,42 @@
 - [Feature Importance](#-feature-importance)
 - [Results Summary](#-results-summary)
 - [Recommendations](#-recommendations)
+
+
+## PROJECT OVERVIEW
+
+Financial fraud continues to be one of the most significant threats to digital banking systems. As the volume of electronic transactions grows, detecting fraudulent activity quickly and accurately has become essential for financial institutions. This project develops a machine learning–based fraud detection system that analyzes transaction behavior and identifies suspicious activity in real time. By leveraging historical transaction data and behavioral patterns, the model learns to distinguish between legitimate and fraudulent transactions. The project applies a complete end-to-end machine learning workflow, including data preprocessing, feature engineering, handling class imbalance, model training, and performance evaluation.
+Two machine learning Models were implemented and compared:
+Logistic Regresiion
+Random Forest Classifier
+
+To address the common challenge of imbalanced fraud datasets, undersampling techniques were applied to ensure the model could effectively learn fraud patterns. Key transaction features such as transaction amount, transaction frequency, account balance behavior, and recent transaction patterns were used to train the models. The results demonstrate how machine learning can significantly improve fraud detection capabilities by identifying high-risk transactions while minimizing false positives. This project highlights how data-driven models can support financial institutions in preventing fraud, protecting customers, and improving transaction security.
+
+## PROJECT SCOPE
+
+The major goal of this capstone project is to build classification models that could be able to identify the patterns in the various transactions and train these models in order to predict the outcome of the transactions if they are fraud transactions or not. These models are built in an attempt to be deployed into real world data especially financial databases and be able to use the models that we build and train to immediately flag transactions who follows the same pattern of the transactions flagged as fraud and prevent future users from falling victims of fraud.
+
+SPECIFIC OBJECTIVES
+Detect fraudulent financial transactions using machine learning
+Analyze transaction behavior and spending patterns
+Handle imbalanced fraud datasets using resampling techniques
+Train and evaluate classification models for fraud.
+Identify key transaction features that contribute to fraud detection.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
