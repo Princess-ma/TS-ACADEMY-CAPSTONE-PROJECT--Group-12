@@ -1,5 +1,5 @@
-# TS ACADEMY CAPSTONE PROJECT
-### Mobile Money Fraud Detection | Group 12 Capstone Project
+# TS ACADEMY CAPSTONE PROJECT- Group 12 (March 2026)
+### Mobile Money Fraud Detection through Classification Models
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.0%2B-orange?style=flat-square&logo=scikit-learn)
