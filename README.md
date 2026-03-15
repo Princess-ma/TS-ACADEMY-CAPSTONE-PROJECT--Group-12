@@ -26,28 +26,30 @@
 | Udoh Edidiong Monday | beeeddy22@gmail.com | [GitHub](https://github.com/Edidiong-Udoh2) | Active Member |
 | Ukonu Fortune Chiemela | ukonufortune@gmail.com | [GitHub](https://github.com/Fortuneukonu) | Active Member |
 | Ogunniyi Ibrahim Adedeji | ogunniyiibrahim2029@gmail.com | [GitHub](https://github.com/nobleXibrahim) | Active Member |
+| Emmanuella Chioma Ogoke | chiomaogoke2025@gmail.com | [GitHub](https://github.com/chiomas-art) | Active Member |
 | Titus Oluwafemi Ojo | femititus@gmail.com | [GitHub](https://github.com/femititus) | Active Member |
+| Kushimo Samuel Oluwashola | kushimooluwashola7652@gmail.com | [GitHub]( https://github.com/iamoluwashola) | Active Member |
+ 
+---
+## Table of Contents
 
+- [Project Overview](#-project-overview)
+- [Project Objectives](#-project-objectives)
+- [Data Source and Justification](#-data-source-and-justification)
+- [Dataset Summary](#-dataset-summary)
+- [Features and Interpretation](#-features-and-interpretation)
+- [Methodology](#-methodology)
+  - [Stage 1 — Data Cleaning and Preparation](#stage-1--data-cleaning-and-preparation)
+  - [Stage 2 — Data Distribution](#stage-2--data-distribution)
+  - [Stage 3 — Bivariate and Multivariate Analysis](#stage-3--bivariate-and-multivariate-analysis)
+  - [Stage 4 — Data Preprocessing](#stage-4--data-preprocessing)
+  - [Stage 5 — Machine Learning](#stage-5--machine-learning)
+- [Results Summary](#-results-summary)
+- [Conclusion and Recommendations](#-conclusion-and-recommendations)
+- [Acknowledgements](#-acknowledgements)
+- [References](#-references)
 
-## 📌 Table of Contents
-
-- [Project Overview]
-- [Dataset]
-- [Project Structure]
-- [Methodology]
-  - [Stage 1 — Data Cleaning & Preparation]
-  - [Stage 2 — Data Distribution]
-  - [Stage 3 — Bivariate & Multivariate Analysis]
-  - [Stage 4 — Data Preprocessing]
-  - [Stage 5 — Machine Learning]
-       - [Model Performance]
-       - [Feature Importance]
-- [Results Summary]
-- [Recommendations]
-- [Acknoweledgement]
-- [References]
-
-
+---
 ## PROJECT OVERVIEW
 
 Financial fraud continues to be one of the most significant threats to digital banking systems. As the volume of electronic transactions grows, detecting fraudulent activity quickly and accurately has become essential for financial institutions. This project develops a machine learning–based fraud detection system that analyzes transaction behavior and identifies suspicious activity in real time. By leveraging historical transaction data and behavioral patterns, the model learns to distinguish between legitimate and fraudulent transactions. The project applies a complete end-to-end machine learning workflow, including data preprocessing, feature engineering, handling class imbalance, model training, and performance evaluation.
@@ -70,12 +72,12 @@ The major goal of this capstone project is to build classification models that c
 - Identify key transaction features that contribute to fraud detection
 
 ## DATA SOURCE AND JUSTIFICATION
-The dataset being used is a fraud detection dataset of users who carried out transactions using paysim. PaySim is a financial simulator that simulates mobile money transactions based on an original dataset. Although the dataset was generated synthetically using paysim, this dataset was chosen because of how good it relates with real world financial transactions and is also a very good dataset that works well with classification models. The dataset shows transactions that were tagged as fraud and those that were legit. It is a large dataset containing 5,420,481 rows and 27 columns sourced from kaggle website (with_aggregated): [Kaggle Website](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) 
+The dataset being used is a fraud detection dataset of users who carried out transactions using paysim. PaySim is a financial simulator that simulates mobile money transactions based on an original dataset. Although the dataset was generated synthetically using paysim, this dataset was chosen because of how good it relates with real world financial transactions and is also a very good dataset that works well with classification models. The dataset shows transactions that were tagged as fraud and those that were legit. It is a large dataset containing 5,420,481 rows and 27 columns sourced from kaggle website (with_aggregated): [Kaggle Dataset](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) 
 
 ### SUMMARY OF THE DATASET
 | Property | Details |
 |---|---|
-| **Source** | [Kaggle — Dataset](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) |
+| **Source** | [Kaggle Dataset](https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim) |
 | **Records** | 5,420,481 transactions |
 | **Original Features** | 27 columns |
 | **Final Features Used** | 6 selected features |
@@ -134,6 +136,22 @@ Stage 3 produced the most decisive analytical discoveries of the entire project,
 ### Stage 4 — Data Preprocessing
 
 Building directly on the evidence from Stage 3, Stage 4 translated all analytical findings into a precise, model-ready dataset. Six features were selected which are:`transaction_amount`, `avg_amount_last_30days`, `transaction_type_encoded`, `total_sent_last_1hr`, `receiver_balance_after` and `week_group_encoded` based on correlation strength, absence of multicollinearity and domain-level interpretability. Features with severe redundancy were excluded, including the three other avg_amount columns (0.93–0.96 correlation with avg_amount_last_30days), sender_balance_before (0.94 correlation with sender_balance_after) and row_id/hour_of_simulation (perfect 1.00 correlation with each other). The dataset was split 80/20 using stratified sampling with random_state=42, preserving the 1.12% fraud rate in both partitions whch produced a training set of 4,336,384 and a test set of 1,084,097. Random undersampling was applied exclusively to the training set, randomly reducing the 4,287,851 non-fraud records to match the 48,533 fraud records, producing a perfectly balanced training set of 97,066 samples. The test set was deliberately left at its original imbalanced distribution to accurately simulate real-world deployment conditions. StandardScaler was fitted exclusively on the balanced training set and used to transform both the training and test sets, ensuring mean=0 and std=1 across all 6 features without allowing the 98.88% non-fraud majority to distort the scaling parameters.
+#### Train-Test Split
+| Split | Total Samples | Non-Fraud (0) | Fraud (1) |
+|---|---|---|---|
+| Training (80%) | 4,336,384 | 4,287,851 | 48,533 |
+| Testing (20%) | 1,084,097 | 1,071,964 | 12,133 |
+
+#### Selected Features
+| Feature | Correlation | Justification |
+|---|---|---|
+| `transaction_amount` | 0.60 | Fraud avg = 2.75M vs 122K legitimate — core signal |
+| `avg_amount_last_30days` | 0.70 | Strongest single predictor — 15-20x higher in fraud |
+| `transaction_type_encoded` | 0.08 | TRANSFER=8.3% fraud, CASH_OUT=2.7% — decisive channel split |
+| `total_sent_last_1hr` | 0.48 | Short-window velocity captures burst fraud spending patterns |
+| `receiver_balance_after` | low | Account flooding pattern confirmed in Stage 3 |
+| `week_group_encoded` | 0.01 | Non-linear end-of-month surge — retained on domain evidence |
+
 
 ### Stage 5- Machine Learning
 
@@ -155,7 +173,7 @@ The **Logistic Regression** model was configured with strong L2 regularization (
 | **Actual Fraud** | 900 | 11,233 |
 
 The **Random Forest** outperformed Logistic Regression across every fraud-specific metric. Configured with n_estimators=100, max_depth=8 and min_samples_leaf=50 to prevent overfitting, it achieved a test recall of 97.50% and F1 of 71.46% reducing false negatives from 900 to just 303 and false positives from 10,166 to 9,146 compared to Logistic Regression. Feature importance by Gini impurity ranked `transaction_amount` first at 42.54%, `avg_amount_last_30days` second at 26.39%, `total_sent_last_1hr` third at 17.55%, `transaction_type_encoded` fourth at 9.95%, `receiver_balance_after` fifth at 3.23% and `week_group_encoded` last at 0.34% validating all feature selection decisions from Stage 4 and confirming that the behavioral fraud patterns discovered in Stages 2 and 3 translated directly into model-level predictive power.
-### Random Forest
+#### Random Forest
 | Metric | Train | Test |
 |---|---|---|
 | Accuracy | 98.40% | 98.98% |
@@ -170,7 +188,7 @@ The **Random Forest** outperformed Logistic Regression across every fraud-specif
 | **Actual Fraud** | 303 | 11,830 |
 
 The **Grid Search CV** evaluated 162 parameter combinations across 486 model fits using ROC-AUC as the scoring metric, identifying the optimal configuration as max_depth=10, min_samples_leaf=25, min_samples_split=50, n_estimators=100 and max_features='sqrt'. This achieved a best cross-validation ROC-AUC of 0.9993, improving fraud precision to 0.60, recall to 0.98 and F1 to 0.75 which confirms that the baseline (random forest) parameters were near-optimal while delivering meaningful operational improvements that make the Grid Search optimised Random Forest the recommended production model.
-### Grid Search CV — Optimised Random Forest
+#### Grid Search CV — Optimised Random Forest
 ```
 Best Parameters:
   max_depth         : 10
@@ -248,6 +266,13 @@ Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O.,
 
 **License**: Apache License 2.0
 **Copyright**: © 2026 TS Academy Capstone Project – Group 12
+
+---
+<div align="center">
+
+*Built with precision. Validated with evidence.*
+
+</div>
 
 
 
