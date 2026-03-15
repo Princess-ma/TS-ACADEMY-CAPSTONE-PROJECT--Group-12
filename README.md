@@ -33,20 +33,20 @@
 
 ## 📌 Table of Contents
 
-- [Project Overview](#-project-overview)
-- [Dataset](#-dataset)
-- [Project Structure](#-project-structure)
-- [Methodology](#-methodology)
-  - [Stage 1 — Data Cleaning & Preparation](#stage-1--data-cleaning--preparation)
-  - [Stage 2 — Data Distribution](#stage-2--data-distribution)
-  - [Stage 3 — Bivariate & Multivariate Analysis](#stage-3--bivariate--multivariate-analysis)
-  - [Stage 4 — Data Preprocessing](#stage-4--data-preprocessing)
-  - [Stage 5 — Machine Learning](#stage-5--machine-learning)
-- [Key Findings](#-key-findings)
-- [Model Performance](#-model-performance)
-- [Feature Importance](#-feature-importance)
-- [Results Summary](#-results-summary)
-- [Recommendations](#-recommendations)
+- [Project Overview]
+- [Dataset]
+- [Project Structure]
+- [Methodology]
+  - [Stage 1 — Data Cleaning & Preparation]
+  - [Stage 2 — Data Distribution]
+  - [Stage 3 — Bivariate & Multivariate Analysis]
+  - [Stage 4 — Data Preprocessing]
+  - [Stage 5 — Machine Learning]
+- [Key Findings]
+- [Model Performance]
+- [Feature Importance]
+- [Results Summary]
+- [Recommendations]
 
 
 ## PROJECT OVERVIEW
