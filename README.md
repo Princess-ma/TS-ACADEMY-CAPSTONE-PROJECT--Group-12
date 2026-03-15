@@ -8,9 +8,9 @@
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)
 
-## 👥 Contributors
+## GROUP 12 ACTIVE CONTRIBUTORS
 
-### 🏆 Group Leader
+### Group Leader
 
 | Name | Email | GitHub | Role |
 |---|---|---|---|
@@ -18,7 +18,7 @@
 
 ---
 
-### 👨‍💻 Active Members
+### Active Members
 
 | Name | Email | GitHub | Role |
 |---|---|---|---|
@@ -29,3 +29,21 @@
 | Adeleye Adekunle Oluwaseun | dequnle7@gmail.com | [GitHub](https://github.com/qunlecrown/TS-ACADEMY-GROUP-12-CAPSTONE-PROJECT/tree/main) | Active Member |
 | Kolawole Julius Oluwatobi | anthonyjk1204@gmail.com | [GitHub](https://github.com/kjuls) | Active Member |
 | Titus Oluwafemi Ojo | femititus@gmail.com | [GitHub](https://github.com/femititus/TS_ACADEMY_GROUP_12_CAPSTONE_PROJECT_FRAUD_DETECTION_2) | Active Member |
+
+
+## 📌 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Dataset](#-dataset)
+- [Project Structure](#-project-structure)
+- [Methodology](#-methodology)
+  - [Stage 1 — Data Cleaning & Preparation](#stage-1--data-cleaning--preparation)
+  - [Stage 2 — Data Distribution](#stage-2--data-distribution)
+  - [Stage 3 — Bivariate & Multivariate Analysis](#stage-3--bivariate--multivariate-analysis)
+  - [Stage 4 — Data Preprocessing](#stage-4--data-preprocessing)
+  - [Stage 5 — Machine Learning](#stage-5--machine-learning)
+- [Key Findings](#-key-findings)
+- [Model Performance](#-model-performance)
+- [Feature Importance](#-feature-importance)
+- [Results Summary](#-results-summary)
+- [Recommendations](#-recommendations)
