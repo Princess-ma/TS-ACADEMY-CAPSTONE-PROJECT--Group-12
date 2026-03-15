@@ -115,6 +115,7 @@ The dataset being used is a fraud detection dataset of users who carried out tra
 | 23 | `avg_amount_last_7days` | float32 | Average transaction amount sent by the sender in the last 7 days |
 | 24 | `avg_amount_last_30days` | float32 | Average transaction amount sent by the sender in the last 30 days |
 | 25 | `transaction_type_encoded` | int8 | Numerically encoded version of transaction_type — CASH_IN=0, CASH_OUT=1, DEBIT=2, PAYMENT=3, TRANSFER=4 |
+
 Note: Three columns were dropped during cleaning and are not included above — transaction_time_duplicate, time_merge_flag and rule_based_fraud_flag — as they were identified as redundant and irrelevant to the fraud prediction objective.
 
 
