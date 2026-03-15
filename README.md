@@ -11,13 +11,11 @@
 ## GROUP 12 ACTIVE CONTRIBUTORS
 
 ### Group Leader
-
 | Name | Email | GitHub | Role |
 |---|---|---|---|
 | Princess Chiamaka Emenari | princessemenari2@gmail.com | | Group Leader |
 
 ---
-
 ### Active Members
 
 | Name | Email | GitHub | Role |
@@ -154,7 +152,7 @@ The **Logistic Regression** model was configured with strong L2 regularization (
 | **Actual Non-Fraud** | 1,061,798 | 10,166 |
 | **Actual Fraud** | 900 | 11,233 |
 
-The **Random Forest** outperformed Logistic Regression across every fraud-specific metric. Configured with n_estimators=100, max_depth=8 and min_samples_leaf=50 to prevent overfitting, it achieved a test recall of 97.50% and F1 of 71.46% — reducing false negatives from 900 to just 303 and false positives from 10,166 to 9,146 compared to Logistic Regression. Feature importance by Gini impurity ranked `transaction_amount` first at 42.54%, `avg_amount_last_30days` second at 26.39%, `total_sent_last_1hr` third at 17.55%, `transaction_type_encoded` fourth at 9.95%, `receiver_balance_after` fifth at 3.23% and `week_group_encoded` last at 0.34% — validating all feature selection decisions from Stage 4 and confirming that the behavioral fraud patterns discovered in Stages 2 and 3 translated directly into model-level predictive power.
+The **Random Forest** outperformed Logistic Regression across every fraud-specific metric. Configured with n_estimators=100, max_depth=8 and min_samples_leaf=50 to prevent overfitting, it achieved a test recall of 97.50% and F1 of 71.46% reducing false negatives from 900 to just 303 and false positives from 10,166 to 9,146 compared to Logistic Regression. Feature importance by Gini impurity ranked `transaction_amount` first at 42.54%, `avg_amount_last_30days` second at 26.39%, `total_sent_last_1hr` third at 17.55%, `transaction_type_encoded` fourth at 9.95%, `receiver_balance_after` fifth at 3.23% and `week_group_encoded` last at 0.34% validating all feature selection decisions from Stage 4 and confirming that the behavioral fraud patterns discovered in Stages 2 and 3 translated directly into model-level predictive power.
 ### Random Forest
 | Metric | Train | Test |
 |---|---|---|
@@ -169,7 +167,7 @@ The **Random Forest** outperformed Logistic Regression across every fraud-specif
 | **Actual Non-Fraud** | 1,062,818 | 9,146 |
 | **Actual Fraud** | 303 | 11,830 |
 
-The **Grid Search CV** evaluated 162 parameter combinations across 486 model fits using ROC-AUC as the scoring metric, identifying the optimal configuration as max_depth=10, min_samples_leaf=25, min_samples_split=50, n_estimators=100 and max_features='sqrt'. This achieved a best cross-validation ROC-AUC of 0.9993, improving fraud precision to 0.60, recall to 0.98 and F1 to 0.75 — confirming the baseline parameters were near-optimal while delivering meaningful operational improvements that make the Grid Search optimised Random Forest the recommended production model.
+The **Grid Search CV** evaluated 162 parameter combinations across 486 model fits using ROC-AUC as the scoring metric, identifying the optimal configuration as max_depth=10, min_samples_leaf=25, min_samples_split=50, n_estimators=100 and max_features='sqrt'. This achieved a best cross-validation ROC-AUC of 0.9993, improving fraud precision to 0.60, recall to 0.98 and F1 to 0.75 which confirms that the baseline (random forest) parameters were near-optimal while delivering meaningful operational improvements that make the Grid Search optimised Random Forest the recommended production model.
 ### Grid Search CV — Optimised Random Forest
 ```
 Best Parameters:
@@ -212,8 +210,8 @@ Best CV ROC-AUC    : 0.9993 (99.93%)
 ```
 
 ---
-## Conclusion and RecommendationS
-### Recommendation
+## Conclusion and Recommendations
+### Recommendations
 
 Based on the findings of the analysis, the organisation should strengthen its fraud prevention framework by focusing on the most significant risk indicators identified in the dataset. 
 - First, real-time velocity monitoring should be implemented so that transactions associated with unusually high values of total_sent_last_1hr, particularly those above the 75th percentile threshold of 304,943, trigger immediate secondary authentication. This is necessary because rapid spending within a short period emerged as the strongest short-term fraud signal.
@@ -244,6 +242,7 @@ Overall, the results show that machine learning models play an important role in
 ### Software & Libraries
 Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V.,
 
+---
 
 **License**: Apache License 2.0
 **Copyright**: © 2026 TS Academy Capstone Project – Group 12
