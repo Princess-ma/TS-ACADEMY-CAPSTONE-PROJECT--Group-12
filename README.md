@@ -44,6 +44,8 @@
        - [Feature Importance]
 - [Results Summary]
 - [Recommendations]
+- [Acknoweledgement]
+- [References]
 
 
 ## PROJECT OVERVIEW
@@ -83,7 +85,7 @@ The dataset being used is a fraud detection dataset of users who carried out tra
 | **Memory (Optimised)** | 475 MB (-57.4%) |
 
 ### FEATURES AND INTERPRETATION
-## 📋 Dataset Column Description
+## Dataset Column Description
 
 | # | Features | Data Type | Description |
 |---|---|---|---|
@@ -115,7 +117,7 @@ The dataset being used is a fraud detection dataset of users who carried out tra
 
 Note: Three columns were dropped during cleaning and are not included above — transaction_time_duplicate, time_merge_flag and rule_based_fraud_flag — as they were identified as redundant and irrelevant to the fraud prediction objective.
 
-## 🔬 Methodology
+## Methodology
 
 ### Stage 1 — Data Cleaning & Preparation
 
