@@ -1,3 +1,8 @@
-# TS-ACADEMY-CAPSTONE-PROJECT--Group-12
-This capstone project is a fraud detection project carried out by the active members of Group 12 in order to prove ourselves and apply our skills and resources invested into us by TS Academy into real world application and reliablity. https://colab.research.google.com/drive/13Eww-S2EfA4XmE7YidPsSts6eYbwT6gI?usp=sharing
+# 🔍 Fraud Detection — Supervised Learning Classification Models
+### PaySim Mobile Money Fraud Detection | Group 12 Capstone Project
 
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.0%2B-orange?style=flat-square&logo=scikit-learn)
+![Pandas](https://img.shields.io/badge/Pandas-1.3%2B-150458?style=flat-square&logo=pandas)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
